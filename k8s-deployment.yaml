@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qr-withdrawal-poc
+  labels:
+    app: qr-withdrawal-poc
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: qr-withdrawal-poc
+  template:
+    metadata:
+      labels:
+        app: qr-withdrawal-poc
+    spec:
+      containers:
+      - name: qr-withdrawal-poc
+        image: <AWS_ACCOUNT_ID>.dkr.ecr.ap-southeast-2.amazonaws.com/qr-withdrawal-poc:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-secrets
+              key: password
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: qr-withdrawal-service
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 8080
+  selector:
+    app: qr-withdrawal-poc
