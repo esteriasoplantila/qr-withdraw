@@ -36,18 +36,17 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <!-- Driver PostgreSQL -->
+        <!-- PostgreSQL / Supabase -->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
 
-        <!-- AWS SDK v2 RDS untuk generate IAM Auth Token otomatis (Opsional tapi direkomendasikan) -->
+        <!-- Health endpoint for Cloud Run -->
         <dependency>
-            <groupId>software.amazon.awssdk</groupId>
-            <artifactId>rds</artifactId>
-            <version>2.20.0</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
     </dependencies>
     <build>
